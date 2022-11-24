@@ -1,0 +1,46 @@
+h1 {
+    font-size: 47px;
+    color: #D04F4F;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.search-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 !important;
+}
+
+.search-block input {
+    border: none;
+}
+
+.search-block, .search-block input {
+    background-color: #E7E7E7;
+}
+
+.search-block-width {
+    max-width: 85% !important;
+}
+
+.search-block, .search-bar {
+    border-radius: 5px;
+}
+
+.search-block .glass {
+    border: none;
+    background-color: transparent;
+    padding: 15px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 15px;
+}
