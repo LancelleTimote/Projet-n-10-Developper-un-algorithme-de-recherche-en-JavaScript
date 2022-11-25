@@ -1,16 +1,30 @@
 import recipes from "../data/recipes.js";
 console.log(recipes)
 
-function getIngredient(recipes) {
+function getTags(recipes) {
     //Crer arayt vide []
+    let tags = {
+        ingredients : [],
+        appareils : [],
+        ustensiles : []
+    };
     for (const recipe of recipes) {
         //ingrediedts (boucle pour récuepere ingredient)
             //if(name ingrenet n'existe pas dans mon table -> Ajouter dans le tableau)
                 // push
+        console.log(recipe);
+        for (const ingredients of recipe.ingredients) {
+            if(!tags.ingredients.includes(ingredients.ingredient)) {
+                tags.ingredients.push(ingredients.ingredient);
+            }
+        }
     }
-
-    //retrun array
+    return tags
 }
+
+
+const tags = getTags(recipes);
+console.log(tags);
 
 // const ingredientsTag = getIngredient(recipes)
 

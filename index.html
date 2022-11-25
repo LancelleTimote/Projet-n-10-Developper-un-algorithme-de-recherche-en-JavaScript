@@ -17,7 +17,7 @@
             <h1>Les petits plats</h1>
         </header>
         <main>
-            <section class="container search-block-width">  <!--search-->
+            <section class="container search-container">  <!--search-->
                 <div class="row">
                     <div class="col search-block">
                         <input class="search-bar" type="search" placeholder="Rechercher une recette" aria-label="Search" />
@@ -26,25 +26,54 @@
                 </div>
             </section>
 
-            <section class="container">     <!--tags-->
+            <section class="container tags-container">     <!--tags-->
                 <div class="row">
-                    <div class="col">
-
+                    <div class="col tags-block">
+                        <span class="tags-text">Coco</span>
+                        <button class="circle-x"><i class="fa-regular fa-circle-xmark fa-lg"></i></button>
                     </div>
                 </div>
             </section>
 
-            <section>   <!--buttons-->
-
+            <section class="container">   <!--buttons-->
+                <div class="row">
+                    <div class="col">
+                        <input type="search" placeholder="Ingredients" aria-label="Ingredients search" />
+                        <button><i class="fa-solid fa-chevron-down fa-lg"></i></button>
+                    </div>
+                </div>
             </section>
 
-            <section>   <!--cards-->
-
+            <section class="container">   <!--cards-->
+                <div class="row">
+                    <div class="col-4 card">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="col-4 card">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    <div class="col-4 card">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
             </section>
-            <i class="fa-solid fa-chevron-down"></i>
-            <i class="fa-solid fa-chevron-up"></i>
-            <i class="fa-regular fa-circle-xmark"></i>
-            <i class="fa-regular fa-clock"></i>
+            <i class="fa-solid fa-chevron-up fa-lg"></i>
+            <i class="fa-regular fa-clock fa-lg"></i>
         </main>
         <script src="https://kit.fontawesome.com/3c40d507a3.js" crossorigin="anonymous"></script>
         <script src="js/index.js" type="module"></script>
