@@ -1,27 +1,36 @@
 import recipes from "../data/recipes.js";
-console.log(recipes)
+console.log(recipes);
 
 function getTags(recipes) {
-    //Crer arayt vide []
+    //Création array vide
     let tags = {
-        ingredients : [],
-        appareils : [],
-        ustensiles : []
+        ingredients: [],
+        appliances: [],
+        ustensils: [],
     };
     for (const recipe of recipes) {
-        //ingrediedts (boucle pour récuepere ingredient)
-            //if(name ingrenet n'existe pas dans mon table -> Ajouter dans le tableau)
-                // push
+        //ingredients (boucle pour récuepere ingredient)
+        //if(name ingrenet n'existe pas dans mon table -> Ajouter dans le tableau)
+        //push
         console.log(recipe);
         for (const ingredients of recipe.ingredients) {
-            if(!tags.ingredients.includes(ingredients.ingredient)) {
+            if (!tags.ingredients.includes(ingredients.ingredient)) {
                 tags.ingredients.push(ingredients.ingredient);
             }
         }
-    }
-    return tags
-}
 
+        if (!tags.appliances.includes(recipe.appliance)) {
+            tags.appliances.push(recipe.appliance);
+        }
+
+        for (const ustensils of recipe.ustensils) {
+            if (!tags.ustensils.includes(ustensils)) {
+                tags.ustensils.push(ustensils);
+            }
+        }
+    }
+    return tags;
+}
 
 const tags = getTags(recipes);
 console.log(tags);
