@@ -1,28 +1,53 @@
+* {
+    box-sizing: inherit !important;
+}
+
 h1 {
     font-size: 47px;
     color: #D04F4F;
+}
+
+.container {
+    padding: 0 !important;
+}
+
+.row {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.col {
+    padding: 0 !important;
 }
 
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 25px;
 }
 
 .searchBar-container {
     background-color: #E7E7E7;
     max-width: 85% !important;
+    margin-top: 25px;
 }
 
 .searchBar-block {
     display: flex;
-    height: 50px;
+    align-items: center;
+    height: 65px;
 }
 
 .searchBar {
     width: 100%;
+    height: 100%;
+}
+
+.glass {
+    position: absolute;
+    padding: 0;
+    right: 9%;
 }
 
 .searchBar-block, .searchBar, .glass, .circle-x {
@@ -50,7 +75,7 @@ header {
 
 .tags-container {
     margin-top: 25px;
-    margin-left: 7.5% !important;
+    margin-left: 6.9% !important;
 }
 
 .searchBar-container, .tags-block {
@@ -67,7 +92,7 @@ header {
 
 
 
-.chevron-down {
+.chevron-down, .searchTypes {
     color: white;
 }
 
@@ -75,20 +100,63 @@ header {
 
 }
 
+.chevron-down {
+    padding: 0;
+}
+
 .searchTypes-block-ingredients {
     background-color: #3282F7;
 }
 
 .searchTypes-block {
+    height: 65px;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .searchTypes-container {
     margin-top: 25px;
-    margin-left: 7.5% !important;
+    margin-left: 6.9% !important;
 }
 
 .chevron-down, .searchTypes-ingredients {
     border: none;
     background-color: transparent;
+}
+
+
+
+
+
+.cards-container {
+    margin-top: 25px;
+    margin-left: 6.9% !important;
+}
+
+.card, .card-body {
+    padding: 0 !important;
+    border-width: 0 !important;
+}
+
+.card-img {
+    background-color: #C7BEBE;
+    border-radius: 5px 5px 0 0 !important;
+    height: 200px;
+}
+
+.card-text {
+    background-color: #E7E7E7;
+    border-radius: 0 0 5px 5px;
+    height: 150px;
+    padding: 20px;
+}
+
+.card-text-top, .card-text-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-text-top {
+    padding-bottom: 15px;
 }

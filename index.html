@@ -17,7 +17,7 @@
             <h1>Les petits plats</h1>
         </header>
         <main>
-            <section class="container searchBar-container">  <!--search-->
+            <section class="container searchBar-container">  <!--searchBar-->
                 <div class="row">
                     <div class="col searchBar-block">
                         <input class="searchBar" type="search" placeholder="Rechercher une recette" aria-label="Search" />
@@ -37,43 +37,40 @@
 
             <section class="container searchTypes-container">   <!--searchTypes-->
                 <div class="row">
-                    <div class="col-2 searchTypes-block searchTypes-block-ingredients d-flex">
+                    <div class="col-2 searchTypes-block searchTypes-block-ingredients">
                         <input class="searchTypes searchTypes-ingredients" type="search" placeholder="Ingredients" aria-label="Ingredients search" />
                         <button class="chevron-down"><i class="fa-solid fa-chevron-down fa-lg"></i></button>
                     </div>
                 </div>
             </section>
 
-            <section class="container">   <!--cards-->
+            <section class="container cards-container">   <!--cards-->
                 <div class="row">
                     <div class="col-4 card">
-                        <img class="card-img-top" src="..." alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="col-4 card">
-                        <img class="card-img-top" src="..." alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="col-4 card">
-                        <img class="card-img-top" src="..." alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="card-img">
+                                <img>
+                            </div>
+                            <div class="card-text">
+                                <div class="card-text-top">
+                                    <h5 class="card-title">Limonade de Coco</h5>
+                                    <div>
+                                        <i class="fa-regular fa-clock fa-lg"></i>
+                                        <span>10 min</span>
+                                    </div>
+                                </div>
+                                <div class="card-text-bottom">
+                                    <div class="col-6">
+                                        <span>Lait de coco: 400ml</span>
+                                    </div>
+                                    <p class="col-6">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <i class="fa-solid fa-chevron-up fa-lg"></i>
-            <i class="fa-regular fa-clock fa-lg"></i>
+            <!-- <i class="fa-solid fa-chevron-up fa-lg"></i> -->
         </main>
         <script src="https://kit.fontawesome.com/3c40d507a3.js" crossorigin="anonymous"></script>
         <script src="js/index.js" type="module"></script>

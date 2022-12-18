@@ -62,3 +62,51 @@ console.log(tags);
 
 // const allTags = getTags(recipes)
 // const ingredients = allTags.ingredients
+
+let myCards = ""
+recipes.forEach(recipe => {
+    con
+})
+
+
+let cardContainer = document.createElement("section");
+cardContainer.classList.add("container", "cards-container");
+
+let cardRow = document.createElement("div");
+cardRow.classList.add("row");
+
+let card = document.createElement("div");
+card.classList.add("col-4", "card");
+
+let cardBody = document.createElement("div");
+cardBody.classList.add("card-body");
+
+let cardDivImg = document.createElement("div");
+cardDivImg.classList.add("card-img");
+
+let cardImg = document.createElement("img");
+
+let cardText = document.createElement("div");
+cardText.classList.add("card-text");
+
+let cardTextTop = document.createElement("div");
+cardTextTop.classList.add("card-text-top");
+
+let cardTitle = document.createElement("h5");
+
+let cardTime = document.createElement("div");
+
+let cardTimerIcon = document.createElement("i");
+cardTimerIcon.classList.add("fa-regular", "fa-clock", "fa-lg");
+
+let cardTimer = document.createElement("span");
+
+let cardTextBottom = document.createElement("div");
+cardTextBottom.classList.add("card-text-bottom");
+
+let cardIngredientsContainer = document.createElement("div");
+cardIngredientsContainer.classList.add("col-6");
+
+let cardIngredients = document.createElement("span");
+
+let cardRecipesSteps = document.createElement("p");
