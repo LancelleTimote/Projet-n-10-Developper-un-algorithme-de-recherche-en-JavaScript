@@ -45,8 +45,9 @@ header {
     right: 9%;
 }
 
-.searchBar-block, .searchBar, .glass, .circle-x {
+.searchBar-block, .searchBar, .glass, .circle-x, .chevron-down, .searchTypes-ingredients {
     background-color: transparent;
+    border: none;
 }
 
 .tags-block-ingredients {
@@ -60,29 +61,25 @@ header {
     height: 40px;
 }
 
-.tags-text {
+.tags-text, .searchTypes {
     margin-left: 20px;
 }
 
-.circle-x, .tags-text, .chevron-down {
+.circle-x, .tags-text, .chevron-down, .searchTypes-block input::placeholder {
     color: white;
 }
 
-.circle-x {
+.circle-x, .chevron-down {
     margin-right: 20px;
 }
 
-.tags-container {
+.tags-container, .searchTypes-container, .cards-container {
     margin-top: 25px;
     margin-left: 7.5% !important;
 }
 
 .searchBar-container, .tags-block, .searchTypes-block {
     border-radius: 5px;
-}
-
-.searchBar, .searchBar-block .glass, .circle-x {
-    border: none;
 }
 
 .searchTypes-block-ingredients {
@@ -95,40 +92,11 @@ header {
     justify-content: space-between;
 }
 
-.searchTypes-block input::placeholder {
-    color: white;
-}
-
-.searchTypes-container {
-    margin-top: 25px;
-    margin-left: 7.5% !important;
-}
-
 .searchTypes {
-    margin-left: 20px;
     width: 100%;
 }
 
-.chevron-down, .searchTypes-ingredients {
-    border: none;
-    background-color: transparent;
-}
-
-.chevron-down {
-    margin-right: 20px;
-}
-
-
-
-
-
-.cards-container {
-    margin-top: 25px;
-    margin-left: 7.5% !important;
-}
-
 .card, .card-body {
-    padding: 0 !important;
     border-width: 0 !important;
 }
 
@@ -154,22 +122,19 @@ header {
     padding-bottom: 15px;
 }
 
-.card-text-top h5 {
+.card-text-top h5, .clockTimer {
     font-size: 18px;
 }
 
 .card-text-bottom ul {
     list-style: none;
-    padding: 0;
-    line-height: 100%;
 }
 
-.card-text-bottom li {
+.card-text-bottom li, .card-text-bottom p {
     font-size: 12px;
 }
 
-.card-text-bottom p {
-    font-size: 12px;
+.card-text-bottom p, .card-text-bottom ul {
     line-height: 100%;
 }
 
@@ -178,6 +143,5 @@ header {
 }
 
 .clockTimer {
-    font-size: 18px;
     font-family: 'Lato';
 }
