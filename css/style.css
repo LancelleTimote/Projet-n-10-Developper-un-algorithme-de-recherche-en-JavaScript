@@ -7,17 +7,12 @@ h1 {
     color: #D04F4F;
 }
 
-.container {
+.noPadding {
     padding: 0 !important;
 }
 
-.row {
-    padding: 0 !important;
+.noMargin {
     margin: 0 !important;
-}
-
-.col {
-    padding: 0 !important;
 }
 
 header {
@@ -42,11 +37,11 @@ header {
 .searchBar {
     width: 100%;
     height: 100%;
+    margin-left: 20px;
 }
 
 .glass {
     position: absolute;
-    padding: 0;
     right: 9%;
 }
 
@@ -62,46 +57,32 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 35px;
+    height: 40px;
 }
 
-.circle-x, .tags-text {
+.tags-text {
+    margin-left: 20px;
+}
+
+.circle-x, .tags-text, .chevron-down {
     color: white;
 }
 
 .circle-x {
-    padding: 0;
+    margin-right: 20px;
 }
 
 .tags-container {
     margin-top: 25px;
-    margin-left: 6.9% !important;
+    margin-left: 7.5% !important;
 }
 
-.searchBar-container, .tags-block {
+.searchBar-container, .tags-block, .searchTypes-block {
     border-radius: 5px;
 }
 
 .searchBar, .searchBar-block .glass, .circle-x {
     border: none;
-}
-
-
-
-
-
-
-
-.chevron-down, .searchTypes {
-    color: white;
-}
-
-.searchTypes-ingredients {
-
-}
-
-.chevron-down {
-    padding: 0;
 }
 
 .searchTypes-block-ingredients {
@@ -110,19 +91,31 @@ header {
 
 .searchTypes-block {
     height: 65px;
-    border-radius: 5px;
     display: flex;
     justify-content: space-between;
 }
 
+.searchTypes-block input::placeholder {
+    color: white;
+}
+
 .searchTypes-container {
     margin-top: 25px;
-    margin-left: 6.9% !important;
+    margin-left: 7.5% !important;
+}
+
+.searchTypes {
+    margin-left: 20px;
+    width: 100%;
 }
 
 .chevron-down, .searchTypes-ingredients {
     border: none;
     background-color: transparent;
+}
+
+.chevron-down {
+    margin-right: 20px;
 }
 
 
@@ -131,7 +124,7 @@ header {
 
 .cards-container {
     margin-top: 25px;
-    margin-left: 6.9% !important;
+    margin-left: 7.5% !important;
 }
 
 .card, .card-body {
@@ -159,4 +152,32 @@ header {
 
 .card-text-top {
     padding-bottom: 15px;
+}
+
+.card-text-top h5 {
+    font-size: 18px;
+}
+
+.card-text-bottom ul {
+    list-style: none;
+    padding: 0;
+    line-height: 100%;
+}
+
+.card-text-bottom li {
+    font-size: 12px;
+}
+
+.card-text-bottom p {
+    font-size: 12px;
+    line-height: 100%;
+}
+
+.card-text-bottom-bold {
+    font-weight: bold;
+}
+
+.clockTimer {
+    font-size: 18px;
+    font-family: 'Lato';
 }
