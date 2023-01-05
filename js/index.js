@@ -35,56 +35,82 @@ function getTags(recipes) {
 const tags = getTags(recipes);
 console.log(tags);
 
+rendreRecipes(recipes)
+
+
+
+//SEARCH BAR
+//Ecouter l'input
+//if input.value > 3
+//Filter Recipes pour créer un nouveau tableau avec les recette filtré
+// (Transformer la recipe en chaine de carractère)
+//  Condition recipeStr.include(Valeur)
+//Lancer rendreRecipes(Newrecipes)
+
+
 // const ingredientsTag = getIngredient(recipes)
 
 // const allTags = getTags(recipes)
 // const ingredients = allTags.ingredients
 
-let myCards = ""
+// function rendreRecipes(arrayRecipes){
+//     let cardsElt = document.getElementById('cards')
+//     cardsElt.innerHTML = ""
 
-for (const recipe of recipes) {
+//     for (const recipe of arrayRecipes) {
 
-}
+//         console.log(recipe)
 
+//         // let cardContainer = document.createElement("section");
+//         // cardContainer.classList.add("container", "cards-container");
 
-let cardContainer = document.createElement("section");
-cardContainer.classList.add("container", "cards-container");
+//         // let cardRow = document.createElement("div");
+//         // cardRow.classList.add("row");
 
-let cardRow = document.createElement("div");
-cardRow.classList.add("row");
+//         let card = document.createElement("div");
+//         card.classList.add("col-4", "card");
 
-let card = document.createElement("div");
-card.classList.add("col-4", "card");
+//         let cardBody = document.createElement("div");
+//         cardBody.classList.add("card-body");
 
-let cardBody = document.createElement("div");
-cardBody.classList.add("card-body");
+//         let cardDivImg = document.createElement("div");
+//         cardDivImg.classList.add("card-img");
 
-let cardDivImg = document.createElement("div");
-cardDivImg.classList.add("card-img");
+//         let cardImg = document.createElement("img");
 
-let cardImg = document.createElement("img");
+//         let cardText = document.createElement("div");
+//         cardText.classList.add("card-text");
 
-let cardText = document.createElement("div");
-cardText.classList.add("card-text");
+//         let cardTextTop = document.createElement("div");
+//         cardTextTop.classList.add("card-text-top");
 
-let cardTextTop = document.createElement("div");
-cardTextTop.classList.add("card-text-top");
+//         let cardTitle = document.createElement("h5");
 
-let cardTitle = document.createElement("h5");
+//         let cardTime = document.createElement("div");
 
-let cardTime = document.createElement("div");
+//         let cardTimerIcon = document.createElement("i");
+//         cardTimerIcon.classList.add("fa-regular", "fa-clock", "fa-lg");
 
-let cardTimerIcon = document.createElement("i");
-cardTimerIcon.classList.add("fa-regular", "fa-clock", "fa-lg");
+//         let cardTimer = document.createElement("span");
 
-let cardTimer = document.createElement("span");
+//         let cardTextBottom = document.createElement("div");
+//         cardTextBottom.classList.add("card-text-bottom");
 
-let cardTextBottom = document.createElement("div");
-cardTextBottom.classList.add("card-text-bottom");
+//         let cardIngredientsContainer = document.createElement("ul");
+//         cardIngredientsContainer.classList.add("col-6");
 
-let cardIngredientsContainer = document.createElement("ul");
-cardIngredientsContainer.classList.add("col-6");
+//         //Boucle ingredients
+//         for (const ingredients of recipe.ingredients) {
+//             console.log(ingredients.ingredient)
+//             let cardIngredients = document.createElement("li");
+//             cardIngredients.textContent = ingredients.ingredient
+//             cardIngredientsContainer.appendChild(cardIngredients)
+//         }
 
-let cardIngredients = document.createElement("li");
+//         console.log(cardIngredientsContainer)
 
-let cardRecipesSteps = document.createElement("p");
+//         let cardRecipesSteps = document.createElement("p");
+
+//         cardsElt.appendChild(card)
+//     }
+// }
