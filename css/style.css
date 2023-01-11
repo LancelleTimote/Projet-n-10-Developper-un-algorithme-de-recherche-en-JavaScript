@@ -6,7 +6,6 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 25px;
 }
 
 h1 {
@@ -74,8 +73,11 @@ h1 {
     margin-right: 20px;
 }
 
+header, .searchBar-container, .card, .tags-container, .searchTypes-container {
+    margin-top: 25px !important;
+}
+
 .searchBar-container, .cards-container, .tags-container, .searchTypes-container {
-    margin-top: 25px;
     max-width: 85% !important;
 }
 
@@ -116,7 +118,7 @@ h1 {
 .card-text {
     background-color: #E7E7E7;
     border-radius: 0 0 5px 5px;
-    height: 150px;
+    height: 250px;
     padding: 20px;
 }
 
@@ -143,10 +145,6 @@ h1 {
 
 .card-text-bottom p, .card-text-bottom ul {
     line-height: 100%;
-}
-
-.card-text-bottom-bold {
-    font-weight: bold;
 }
 
 .clockTimer {
