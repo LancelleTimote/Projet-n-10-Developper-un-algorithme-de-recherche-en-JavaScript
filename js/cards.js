@@ -9,20 +9,32 @@ function renderRecipes(arrayRecipes){
         // Boucle ingredients
         for (const ingredients of recipe.ingredients) {
             let cardIngredientsElements = document.createElement("li");
+            let ingredient = document.createElement("strong");
+            ingredient.textContent = ingredients.ingredient;
+            cardIngredientsElements.appendChild(ingredient);
 
+            //vérification obligatoire pour les unités car pas présentes partout
+            let spanTest = document.createElement("span");
             if(ingredients.unit === '' || ingredients.unit == null) {
+                //si pas d'unités, vérification quantité car pas partout
                 if(ingredients.quantity) {
-                    cardIngredientsElements.innerHTML = "<strong>" + ingredients.ingredient + ":</strong> " + ingredients.quantity;
+                    spanTest.textContent = ingredients.quantity;
+                   
+                    // cardIngredientsElements.textContent += ingredients.quantity;
                 }
             }else{
-                cardIngredientsElements.innerHTML = "<strong>" + ingredients.ingredient + ":</strong> " + ingredients.quantity + ingredients.unit;
+                // cardIngredientsElements.textContent += ingredients.quantity + ingredients.unit;
+                spanTest.textContent = ' : ' + ingredients.quantity + ingredients.unit;
             }
+            cardIngredientsElements.appendChild(spanTest);
+            
+
             cardIngredientsContainer.appendChild(cardIngredientsElements);
         }
 
         let cardRecipesSteps = document.createElement("p");
         cardRecipesSteps.classList.add("col-6", "noPadding", "noMargin");
-        cardRecipesSteps.innerHTML = recipe.description;
+        cardRecipesSteps.textContent = recipe.description;
 
         let cardTextBottom = document.createElement("div");
         cardTextBottom.classList.add("card-text-bottom");
@@ -30,14 +42,14 @@ function renderRecipes(arrayRecipes){
         cardTextBottom.appendChild(cardRecipesSteps);
 
         let cardTitle = document.createElement("h5");
-        cardTitle.innerHTML = recipe.name;
+        cardTitle.textContent = recipe.name;
 
         let cardTimerIcon = document.createElement("i");
         cardTimerIcon.classList.add("fa-regular", "fa-clock", "fa-lg");
 
         let cardTimerText = document.createElement("span");
         cardTimerText.classList.add("clockTimer");
-        cardTimerText.innerHTML = " " + recipe.time + " min";
+        cardTimerText.textContent = " " + recipe.time + " min";
 
         let cardTime = document.createElement("div");
         cardTime.appendChild(cardTimerIcon);
@@ -72,4 +84,8 @@ function renderRecipes(arrayRecipes){
     }
 }
 
-export default  renderRecipes;
+export default renderRecipes;
+
+function displayRecipes(recipes) {
+    
+}
