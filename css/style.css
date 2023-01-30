@@ -31,7 +31,7 @@ h1 {
     height: 65px;
 }
 
-.searchBar-block input::placeholder, .searchTypes-block input::placeholder {
+.searchBar-block input::placeholder, .dropdown-block input::placeholder {
     padding-left: 20px;
 }
 
@@ -45,7 +45,7 @@ h1 {
     right: 9%;
 }
 
-.searchBar-block, .searchBar, .glass, .circle-x, .chevron-down, .searchTypes-ingredients {
+.searchBar-block, .searchBar, .glass, .circle-x, .chevron-down, .dropdown-ingredients {
     background-color: transparent;
     border: none;
 }
@@ -65,7 +65,7 @@ h1 {
     margin-left: 20px;
 }
 
-.circle-x, .tags-text, .chevron-down, .searchTypes-block input::placeholder {
+.circle-x, .tags-text, .chevron-down, .dropdown-block input::placeholder {
     color: white;
 }
 
@@ -73,27 +73,27 @@ h1 {
     margin-right: 20px;
 }
 
-header, .searchBar-container, .card, .tags-container, .searchTypes-container {
+header, .searchBar-container, .card, .tags-container, .dropdown-container {
     margin-top: 25px !important;
 }
 
-.searchBar-container, .cards-container, .tags-container, .searchTypes-container {
+.searchBar-container, .cards-container, .tags-container, .dropdown-container {
     max-width: 85% !important;
 }
 
-.searchBar-container, .tags-block, .searchTypes-block {
+.searchBar-container, .tags-block, .dropdown-block {
     border-radius: 5px;
 }
 
-.searchTypes-block-ingredients {
+.dropdown-block-ingredients {
     background-color: #3282F7;
 }
 
-.searchTypes-block {
+.dropdown-block {
     height: 65px;
 }
 
-.searchTypes {
+.dropdown {
     height: 100%;
     width: 100%;
     padding-right: 0;

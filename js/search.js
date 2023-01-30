@@ -19,20 +19,12 @@ import renderRecipes from "./cards.js";
 
 
 function searchBar(recipes) {
-    // console.log(recipe.name);
-
     let searchBarInput = document.getElementById('searchBarInput');
-    // console.log(searchBarInput);
 
     searchBarInput.addEventListener('input', () =>{
-       let inputElt = searchBarInput.value;
+        let inputElt = searchBarInput.value;
 
         if(inputElt.length >= 3) {
-            // const result = recipes.filter((recipe) => recipe.name.toLowerCase().includes(inputElt)
-            // || recipe.description.toLowerCase().includes(inputElt)
-            // || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(inputElt)));
-
-            // updatedRecipes = result;
             search(recipes, inputElt);
         }
     });
@@ -50,7 +42,5 @@ function search(recipes, value = null){
 
     renderRecipes(result);
 }
-
-
 
 export default searchBar;

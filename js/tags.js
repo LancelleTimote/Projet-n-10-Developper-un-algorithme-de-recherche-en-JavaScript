@@ -1,4 +1,4 @@
-function getTags(recipes) {
+export function getTags(recipes) {
     //creation 3 array vide pour les incrementer
     let tags = {
         ingredients: [],
@@ -28,26 +28,49 @@ function getTags(recipes) {
     return tags;
 }
 
-//init(nameTag, tagList){
-    // renderBouton(nameTag)
-    //RenderTagList(tagList)
-// }
+export function init(nameTag, tagList){
+    renderDropdown(nameTag)
+    RenderTagList(nameTag, tagList)
+}
 
-//renderBouton(nameTag){
-    //  Créer du HTML (searchTypes-block-i-${nameTag})
-    //  Créer du HTML <SECTION> (#${nameTag})
-// }
 
-//RenderTagList(nameTag, tagList){
+function renderDropdown(nameTag) {
+    let dropdownIcon = document.createElement("i");
+    dropdownIcon.classList.add("fa-solid", "fa-chevron-down", "fa-lg");
+
+    let dropdownButton = document.createElement("button");
+    dropdownButton.classList.add("chevron-down", "noPadding");
+    dropdownButton.appendChild(dropdownIcon);
+
+    let dropdownInput = document.createElement("input");
+    dropdownInput.classList.add("dropdown", `dropdown-${nameTag}`);
+    dropdownInput.type = "search";
+    dropdownInput.placeholder = nameTag;
+    dropdownInput.ariaLabel = `${nameTag} search`;
+
+    let dropdownContainer = document.createElement("div");
+    dropdownContainer.classList.add("col-2", `dropdown-block-${nameTag}`, "noPadding");
+    dropdownContainer.id = nameTag;
+    dropdownContainer.appendChild(dropdownInput);
+    dropdownContainer.appendChild(dropdownButton);
+
+    let dropdown = document.getElementById("dropdown");
+    dropdown.appendChild(dropdownContainer);
+
+    //addEventListener -> Ouvrir/fermé le menu (Le UL)
+}
+
+function RenderTagList(nameTag, tagList){
+    console.log(tagList, nameTag)
+    let elt = document.getElementById(nameTag)
+    elt = elt.querySelector('button')
+    console.log(elt)
     // GetById (section > tag INGREDIENT)
-    // Création HTML des tags
-// }
+    // Création HTML des tags (LI)
+    // 
+}
 
+// AddTag (HTML)
 
-export default getTags;
-// console.log(tags);
+//Close Tag
 
-// const ingredientsTag = getIngredient(recipes);
-
-// const allTags = getTags(recipes);
-// const ingredients = allTags.ingredients;

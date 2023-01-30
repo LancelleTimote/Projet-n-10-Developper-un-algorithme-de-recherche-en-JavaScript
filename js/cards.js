@@ -1,5 +1,5 @@
 function renderRecipes(arrayRecipes){
-    let cardsElt = document.getElementById('cards');
+    let cardsElt = document.getElementById("cards");
     cardsElt.innerHTML = "";
 
     for (const recipe of arrayRecipes) {
@@ -9,25 +9,25 @@ function renderRecipes(arrayRecipes){
         // Boucle ingredients
         for (const ingredients of recipe.ingredients) {
             let cardIngredientsElements = document.createElement("li");
+
             let ingredient = document.createElement("strong");
             ingredient.textContent = ingredients.ingredient;
             cardIngredientsElements.appendChild(ingredient);
 
+            //élément strong séparé par span car sinon plus en strong
+            let ingredientQuantity = document.createElement("span");
+
             //vérification obligatoire pour les unités car pas présentes partout
-            let spanTest = document.createElement("span");
             if(ingredients.unit === '' || ingredients.unit == null) {
                 //si pas d'unités, vérification quantité car pas partout
                 if(ingredients.quantity) {
-                    spanTest.textContent = ingredients.quantity;
-                   
-                    // cardIngredientsElements.textContent += ingredients.quantity;
+                    ingredientQuantity.textContent = " : " + ingredients.quantity;
                 }
             }else{
                 // cardIngredientsElements.textContent += ingredients.quantity + ingredients.unit;
-                spanTest.textContent = ' : ' + ingredients.quantity + ingredients.unit;
+                ingredientQuantity.textContent = " : " + ingredients.quantity + " " + ingredients.unit;
             }
-            cardIngredientsElements.appendChild(spanTest);
-            
+            cardIngredientsElements.appendChild(ingredientQuantity);
 
             cardIngredientsContainer.appendChild(cardIngredientsElements);
         }
@@ -85,7 +85,3 @@ function renderRecipes(arrayRecipes){
 }
 
 export default renderRecipes;
-
-function displayRecipes(recipes) {
-    
-}
