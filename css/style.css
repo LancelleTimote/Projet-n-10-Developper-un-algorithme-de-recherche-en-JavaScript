@@ -45,13 +45,9 @@ h1 {
     right: 9%;
 }
 
-.searchBar-block, .searchBar, .glass, .circle-x, .chevron-down, .dropdown-ingredients {
+.searchBar-block, .searchBar, .glass, .circle-x, .chevron-down, .dropdown-ingredients, .dropdown-appliances, .dropdown-ustensils {
     background-color: transparent;
     border: none;
-}
-
-.tags-block-ingredients {
-    background-color: #3282F7;
 }
 
 .tags-block {
@@ -85,8 +81,20 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
     border-radius: 5px;
 }
 
-.dropdown-block-ingredients {
+.dropdown-block-ingredients, .tags-block-ingredients {
     background-color: #3282F7;
+}
+
+.dropdown-block-appliances {
+    background-color: #68D9A4;
+}
+
+.dropdown-block-ustensils {
+    background-color: #ED6454;
+}
+
+.dropdown-block-ustensils, .dropdown-block-appliances {
+    margin-left: 20px;
 }
 
 .dropdown-block {
@@ -97,6 +105,7 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
     height: 100%;
     width: 100%;
     padding-right: 0;
+    text-transform: capitalize;
 }
 
 .chevron-down {
@@ -118,7 +127,7 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
 .card-text {
     background-color: #E7E7E7;
     border-radius: 0 0 5px 5px;
-    height: 250px;
+    height: 150px;
     padding: 20px;
 }
 
@@ -137,6 +146,11 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
 
 .card-text-bottom ul {
     list-style: none;
+}
+
+.card-text-bottom p {
+    max-height: 97px;
+    overflow: auto;
 }
 
 .card-text-bottom li, .card-text-bottom p {
@@ -158,4 +172,21 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
 .cards-row {
     display: flex;
     justify-content: space-between;
+}
+
+.display-tagsList {
+    display: none !important;
+}
+
+.tagsList-block {
+    list-style: none;
+    background-color: #3282F7;
+    height: 400px;
+    width: 1500px;
+    margin-top: -26px;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
