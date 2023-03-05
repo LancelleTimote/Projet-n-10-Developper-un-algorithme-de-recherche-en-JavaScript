@@ -16,31 +16,39 @@ import renderRecipes from "./cards.js";
 
 //Search(RECIPES) Trier un tableau -> rendreRecipes(NewRecipes)
 
-
-
 function searchBar(recipes) {
-    let searchBarInput = document.getElementById('searchBarInput');
+    const searchBarInput = document.getElementById('searchBarInput');
 
-    searchBarInput.addEventListener('input', () =>{
-        let inputElt = searchBarInput.value;
-
-        if(inputElt.length >= 3) {
-            search(recipes, inputElt);
-        }
+    searchBarInput.addEventListener('input', () => {
+        const inputElt = searchBarInput.value;
+        //utilisation d'un opérateur ternaire pour remplacer la conditionnelle if/else
+        inputElt.length >= 3 ? search(recipes, inputElt) : renderRecipes(recipes);
     });
 }
 
 function search(recipes, value = null){
     let result = recipes;
     if(value){
-        result = recipes.filter((recipe) => recipe.name.toLowerCase().includes(value)
-        || recipe.description.toLowerCase().includes(value)
-        || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(value)));
+        result = recipes.filter(recipe => {
+            //utilisation d'une variable lowerCase pour éviter de faire plusieurs fois value.toLowerCase()
+            const lowerCaseValue = value.toLowerCase();
+            return recipe.name.toLowerCase().includes(lowerCaseValue)
+            || recipe.description.toLowerCase().includes(lowerCaseValue)
+            || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(lowerCaseValue))
+        });
     }
 
-    //Ajouter la gestion des tags
+    // Gestion des tags Selectionné
+    //Récuperes les tags Selectionné dans le HTML (ing, app, ust) document.querySelectorAll(".tags-block-ingredients span")
+
+    //if has tag ingre - trie ingreditne
+    //if has tag app - trie app
+    //if has tag ust - trie ust
+
 
     renderRecipes(result);
 }
+
+
 
 export default searchBar;

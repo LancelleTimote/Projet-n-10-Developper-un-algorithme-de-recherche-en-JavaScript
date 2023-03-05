@@ -1,11 +1,6 @@
 export function getTags(recipes) {
-    //creation 3 array vide pour les incrementer
-    let tags = {
-        ingredients: [],
-        appliances: [],
-        ustensils: [],
-    };
-    for (const recipe of recipes) {
+    //reduce permet de traiter chaque élément du tableau recipes en accumulant les résultats dans l'objet tags
+    return recipes.reduce((tags, recipe) => {
         //ingredients (boucle pour recupere ingredient)
         //if(name ingredient, etc... existe pas dans mon tableau -> ajouter dans le tableau)
         //push
@@ -24,105 +19,74 @@ export function getTags(recipes) {
                 tags.ustensils.push(ustensils);
             }
         }
-    }
-    return tags;
+        return tags;
+    },
+    //creation 3 array vide pour les incrementer
+    { ingredients: [], appliances: [], ustensils: [] });
 }
 
 function renderDropdown(nameTag) {
-    let tagsListContainer = document.createElement("ul");
-    tagsListContainer.classList.add("display-tagsList", "tagsList-block", `tagsList-block-${nameTag}`);
-    // tagsListContainer.id = `tagsList-block-${nameTag}`;
+    const tagsListContainer = document.createElement("ul");
+    tagsListContainer.className = `display-noTags tagsList-block tagsList-block-${nameTag}`;
 
-    let dropdownIcon = document.createElement("i");
-    dropdownIcon.classList.add("fa-solid", "fa-chevron-down", "fa-lg");
+    const dropdownIcon = document.createElement("i");
+    dropdownIcon.className = "fa-solid fa-chevron-down fa-lg";
 
-    let dropdownButton = document.createElement("button");
-    dropdownButton.classList.add("chevron-down", "noPadding");
-    dropdownButton.appendChild(dropdownIcon);
+    const dropdownButton = document.createElement("button");
+    dropdownButton.className = "chevron-down noPadding";
+    dropdownButton.append(dropdownIcon);
 
-    let dropdownInput = document.createElement("input");
-    dropdownInput.classList.add("dropdown", `dropdown-${nameTag}`);
+    const dropdownInput = document.createElement("input");
+    dropdownInput.className = `dropdown dropdown-${nameTag}`;
     dropdownInput.type = "search";
     dropdownInput.placeholder = nameTag;
     dropdownInput.ariaLabel = `${nameTag} search`;
 
-    let dropdownContainer = document.createElement("div");
-    dropdownContainer.classList.add("col-2", "dropdown-block", `dropdown-block-${nameTag}`, "noPadding");
+    const dropdownInputIcon = document.createElement("div");
+    dropdownInputIcon.className = "dropdown-divInputIcon dropdown-divInputIcon-noTags";
+    dropdownInputIcon.append(dropdownInput, dropdownButton);
+
+    const dropdownContainer = document.createElement("div");
+    dropdownContainer.className = `col-2 dropdown-block dropdown-block-noTags dropdown-block-${nameTag} noPadding`;
     dropdownContainer.id = nameTag;
-    dropdownContainer.appendChild(dropdownInput);
-    dropdownContainer.appendChild(dropdownButton);
-    dropdownContainer.appendChild(tagsListContainer);
+    dropdownContainer.append(dropdownInputIcon, tagsListContainer);
 
-    let dropdown = document.getElementById("dropdown");
-    dropdown.appendChild(dropdownContainer);
+    document.getElementById("dropdown").appendChild(dropdownContainer);
 
-    //Ouvrir et fermer la liste de tags
+    //Ouvrir et fermer la liste de tags / utilisation toggle pour ajouter class si présent ou absent en éliminant if / else
     dropdownButton.addEventListener('click', (e) => {
         e.preventDefault();
-        if(tagsListContainer.classList.contains("display-tagsList")) {
-            tagsListContainer.classList.remove("display-tagsList");
-        }else{
-            tagsListContainer.classList.add("display-tagsList");
-        }
+        tagsListContainer.classList.toggle("display-noTags");
+        tagsListContainer.classList.toggle("display-tags");
+        dropdownInputIcon.classList.toggle("dropdown-divInputIcon-noTags");
+        dropdownInputIcon.classList.toggle("dropdown-divInputIcon-tags");
+        dropdownContainer.classList.toggle("dropdown-block-noTags");
+        dropdownContainer.classList.toggle("dropdown-block-tags");
     });
 }
 
-
-    // let openDropdownIcon = document.getElementById(nameTag);
-    // openDropdownIcon.appendChild(tagsContainer);
-
-    //addEventListener -> Ouvrir/fermé le menu (Le UL)
-    // let openDropdownIcon = document.getElementById(nameTag);
-    // openDropdownIcon = openDropdownIcon.querySelector("button");
-    // console.log(openDropdownIcon);
-
-
-    // dropdownButton.addEventListener('click', (e) => { RenderTagList(nameTag, tagList) });
-
-function openDropdown(nameTag) {
-    let tagsListContainer = document.getElementById(`tagsList-block-${nameTag}`);
-    tagsListContainer.classList.remove('test')
-}
-
-function closeDropdown(nameTag) {
-    let tagsListContainer = document.getElementById(`tagsList-block-${nameTag}`);
-    tagsListContainer.classList.add('test')
-}
-
-// function RenderTagList(nameTag, tagList){
-//     console.log(tagList, nameTag);
-
-//     let tags = document.createElement("li");
-//     tags.textContent = tagList;
-
-//     let tagsContainer = document.createElement("ul");
-//     tagsContainer.appendChild(tags);
-//     // GetById (section > tag INGREDIENT)
-//     // Création HTML des tags (LI)
-//     //
-// }
-
 // const RenderTagList = (nameTag, tagList) => {
 function RenderTagList(nameTag, tagList){
-    //getElementById pour appendchild le tagsListContainer dans renderDropDown
-    // let tagsListContainer = document.getElementsByClassName(`tagsList-block-${nameTag}`);
     let tagsListContainer = document.querySelector(`.tagsList-block-${nameTag}`);
 
     for (const tag of tagList) {
         let tags = document.createElement("li");
         tags.textContent = tag;
-        // tagsListContainer[0].appendChild(tags);
         tagsListContainer.appendChild(tags);
 
         //Quand on clic sur le tag -> lancer ADDTAG()
-        tagsListContainer.addEventListener('click', (e) => {
+        tags.addEventListener('click', (e) => {
             //Si non e.target.textContent
-            addTag(tags, nameTag)
+            console.log(e.target.textContent)
+            // addTag(tags, nameTag)
         })
     }
 }
 
-// AddTag (LEs tage en question nom du tag, Catégorie HTML) -> //Close Tag
+// AddTag (LEs tage en question nom du tag, Catégorie HTML, search()) -> //Close Tag, search()
+
+//Function SearchInTagList
+
 
 export function init(nameTag, tagList){
     renderDropdown(nameTag)

@@ -1,83 +1,67 @@
 function renderRecipes(arrayRecipes){
-    let cardsElt = document.getElementById("cards");
+    const cardsElt = document.getElementById("cards");
     cardsElt.innerHTML = "";
 
     for (const recipe of arrayRecipes) {
-        let cardIngredientsContainer = document.createElement("ul");
-        cardIngredientsContainer.classList.add("col-6", "noPadding", "noMargin");
+        const cardIngredientsContainer = document.createElement("ul");
+        cardIngredientsContainer.className = "col-6 noPadding noMargin";
 
         // Boucle ingredients
-        for (const ingredients of recipe.ingredients) {
-            let cardIngredientsElements = document.createElement("li");
+        for (const { ingredient, unit, quantity } of recipe.ingredients) {
+            const cardIngredientsElements = document.createElement("li");
 
-            let ingredient = document.createElement("strong");
-            ingredient.textContent = ingredients.ingredient;
-            cardIngredientsElements.appendChild(ingredient);
+            const ingredientEl = document.createElement("strong");
+            ingredientEl.textContent = ingredient;
 
-            //élément strong séparé par span car sinon plus en strong
-            let ingredientQuantity = document.createElement("span");
+            const ingredientQuantity = document.createElement("span");
+            // Vérifier si la quantité existe et si l'unité de mesure existe
+            ingredientQuantity.textContent = quantity && (unit ? ` : ${quantity} ${unit}` : ` : ${quantity}`);
 
-            //vérification obligatoire pour les unités car pas présentes partout
-            if(ingredients.unit === '' || ingredients.unit == null) {
-                //si pas d'unités, vérification quantité car pas partout
-                if(ingredients.quantity) {
-                    ingredientQuantity.textContent = " : " + ingredients.quantity;
-                }
-            }else{
-                // cardIngredientsElements.textContent += ingredients.quantity + ingredients.unit;
-                ingredientQuantity.textContent = " : " + ingredients.quantity + " " + ingredients.unit;
-            }
-            cardIngredientsElements.appendChild(ingredientQuantity);
-
+            cardIngredientsElements.append(ingredientEl, ingredientQuantity);
             cardIngredientsContainer.appendChild(cardIngredientsElements);
         }
 
-        let cardRecipesSteps = document.createElement("p");
-        cardRecipesSteps.classList.add("col-6", "noPadding", "noMargin");
+        const cardRecipesSteps = document.createElement("p");
+        cardRecipesSteps.className = "col-6 noPadding noMargin";
         cardRecipesSteps.textContent = recipe.description;
 
-        let cardTextBottom = document.createElement("div");
-        cardTextBottom.classList.add("card-text-bottom");
-        cardTextBottom.appendChild(cardIngredientsContainer);
-        cardTextBottom.appendChild(cardRecipesSteps);
+        const cardTextBottom = document.createElement("div");
+        cardTextBottom.className = "card-text-bottom";
+        cardTextBottom.append(cardIngredientsContainer, cardRecipesSteps);
 
-        let cardTitle = document.createElement("h5");
+        const cardTitle = document.createElement("h5");
         cardTitle.textContent = recipe.name;
 
-        let cardTimerIcon = document.createElement("i");
-        cardTimerIcon.classList.add("fa-regular", "fa-clock", "fa-lg");
+        const cardTimerIcon = document.createElement("i");
+        cardTimerIcon.className = "fa-regular fa-clock fa-lg";
 
-        let cardTimerText = document.createElement("span");
-        cardTimerText.classList.add("clockTimer");
-        cardTimerText.textContent = " " + recipe.time + " min";
+        const cardTimerText = document.createElement("span");
+        cardTimerText.className = "clockTimer";
+        cardTimerText.textContent = ` ${recipe.time} min`;
 
-        let cardTime = document.createElement("div");
-        cardTime.appendChild(cardTimerIcon);
-        cardTime.appendChild(cardTimerText);
+        const cardTime = document.createElement("div");
+        cardTime.append(cardTimerIcon, cardTimerText);
 
-        let cardTextTop = document.createElement("div");
-        cardTextTop.classList.add("card-text-top");
-        cardTextTop.appendChild(cardTitle);
-        cardTextTop.appendChild(cardTime);
+        const cardTextTop = document.createElement("div");
+        cardTextTop.className = "card-text-top";
+        cardTextTop.append(cardTitle, cardTime);
 
-        let cardImg = document.createElement("img");
+        const cardImg = document.createElement("img");
 
-        let cardDivImg = document.createElement("div");
-        cardDivImg.classList.add("card-img");
+        const cardDivImg = document.createElement("div");
+        cardDivImg.className = "card-img";
         cardDivImg.appendChild(cardImg);
 
-        let cardText = document.createElement("div");
-        cardText.classList.add("card-text");
-        cardText.appendChild(cardTextTop);
-        cardText.appendChild(cardTextBottom);
+        const cardText = document.createElement("div");
+        cardText.className = "card-text";
+        cardText.append(cardTextTop, cardTextBottom);
 
-        let cardBody = document.createElement("div");
-        cardBody.classList.add("card-body", "noPadding");
-        cardBody.appendChild(cardDivImg);
-        cardBody.appendChild(cardText);
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body noPadding";
+        cardBody.append(cardDivImg, cardText);
 
-        let card = document.createElement("div");
-        card.classList.add("col-4", "card", "noPadding");
+        const card = document.createElement("div");
+        card.className = "col-4 card noPadding";
         card.appendChild(cardBody);
 
         cardsElt.appendChild(card);
