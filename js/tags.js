@@ -65,30 +65,60 @@ function renderDropdown(nameTag) {
     });
 }
 
-// const RenderTagList = (nameTag, tagList) => {
-function RenderTagList(nameTag, tagList){
+function renderTagList(nameTag, tagList){
     let tagsListContainer = document.querySelector(`.tagsList-block-${nameTag}`);
+    tagsListContainer.innerHTML = "";
 
     for (const tag of tagList) {
         let tags = document.createElement("li");
         tags.textContent = tag;
         tagsListContainer.appendChild(tags);
 
-        //Quand on clic sur le tag -> lancer ADDTAG()
+        //Quand on clic sur le tag lance addTag
         tags.addEventListener('click', (e) => {
-            //Si non e.target.textContent
-            console.log(e.target.textContent)
-            // addTag(tags, nameTag)
+            e.preventDefault();
+            addTag(tags, nameTag);
         })
     }
 }
 
 // AddTag (LEs tage en question nom du tag, Catégorie HTML, search()) -> //Close Tag, search()
+function addTag (tags, nameTag) {
+    const tagsText = document.createElement("span");
+    tagsText.className = `tags-text`;
+    tagsText.textContent = tags.textContent;
 
-//Function SearchInTagList
+    const tagsCross = document.createElement("i");
+    tagsCross.className = `fa-regular fa-circle-xmark fa-lg`;
+
+    const tagsButton = document.createElement("button");
+    tagsButton.className = `circle-x noPadding`;
+    tagsButton.append(tagsCross);
+
+    const tagsBlock = document.createElement("div");
+    tagsBlock.className = `col-1 tags-block tags-block-${nameTag} noPadding gapMainElt`;
+    tagsBlock.append(tagsText, tagsButton);
+
+    const tagsElt = document.getElementById("tags");
+    tagsElt.append(tagsBlock);
+
+    tagsButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        tagsBlock.remove();
+    })
+}
+
+function searchTagList() {
+    //Input Elm
+
+    //AddEnventListener
+    //Récuper la value
+    //Filter la liste de tag par rapporut a la value input -> Refait newTabTagList -> renderTagList()
+}
 
 
 export function init(nameTag, tagList){
     renderDropdown(nameTag)
-    RenderTagList(nameTag, tagList)
+    // searchTagList()
+    renderTagList(nameTag, tagList)
 }

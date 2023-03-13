@@ -31,18 +31,19 @@ h1 {
     height: 65px;
 }
 
-.searchBar-block input::placeholder, .dropdown-block input::placeholder {
-    padding-left: 20px;
-}
-
 .searchBar {
     width: 100%;
     height: 100%;
+    outline: none;
+    margin-left: 20px;
 }
 
 .glass {
-    position: absolute;
-    right: 9%;
+    margin-right: 20px;
+}
+
+.chevron-down {
+    margin-right: 20px;
 }
 
 .searchBar-block, .searchBar, .glass, .circle-x, .chevron-down, .dropdown-ingredients, .dropdown-appliances, .dropdown-ustensils {
@@ -69,7 +70,7 @@ h1 {
     margin-right: 20px;
 }
 
-header, .searchBar-container, .card, .tags-container, .dropdown-container {
+header, .searchBar-container, .card, .dropdown-container {
     margin-top: 25px !important;
 }
 
@@ -85,21 +86,20 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
     background-color: #3282F7;
 }
 
-.dropdown-block-appliances {
+.dropdown-block-appliances, .tags-block-appliances {
     background-color: #68D9A4;
 }
 
-.dropdown-block-ustensils {
+.dropdown-block-ustensils, .tags-block-ustensils {
     background-color: #ED6454;
 }
 
-.dropdown-block-ustensils, .dropdown-block-appliances {
-    margin-left: 20px;
-}
-
 .dropdown {
+    width: 100%;
+    margin-left: 20px;
     padding-right: 0;
     text-transform: capitalize;
+    outline: none;
 }
 
 .card, .card-body {
@@ -168,6 +168,23 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
     z-index: 1;
 }
 
+.tagsList-block li {
+    color: white;
+    cursor: pointer;
+}
+
+.tagsList-block-ingredients li:hover {
+    background-color: #3065b4;
+}
+
+.tagsList-block-appliances li:hover {
+    background-color: #4b9b76;
+}
+
+.tagsList-block-ustensils li:hover {
+    background-color: #b64e43;
+}
+
 .dropdown-divInputIcon {
     display: flex;
 }
@@ -180,7 +197,6 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
 
 .dropdown-divInputIcon-noTags {
     height: 100%;
-    justify-content: space-around;
 }
 
 .dropdown-block-noTags {
@@ -191,14 +207,32 @@ header, .searchBar-container, .card, .tags-container, .dropdown-container {
 .display-tags {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    max-height: 500px;
+    overflow: auto;
+    gap: 5px;
 }
 
 .dropdown-divInputIcon-tags {
     justify-content: space-between;
+    height: 55px;
+}
+
+.dropdown-divInputIcon-tags input {
+    margin-left: 30px;
 }
 
 .dropdown-block-tags {
-    max-height: 500px;
     width: auto !important;
-    overflow: scroll;
+}
+
+.dropdown::-webkit-search-cancel-button, .searchBar::-webkit-search-cancel-button {
+    display: none;
+}
+
+#tags, #dropdown {
+    gap: 0 20px;
+}
+
+.gapMainElt {
+    margin-top: 25px !important;
 }

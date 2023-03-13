@@ -38,10 +38,23 @@ function search(recipes, value = null){
         });
     }
 
-    // Gestion des tags Selectionné
+    //Gestion des tags Selectionné
     //Récuperes les tags Selectionné dans le HTML (ing, app, ust) document.querySelectorAll(".tags-block-ingredients span")
 
+    // const tagListIng = document.querySelectorAll(".tags-block-ingredients span")
     //if has tag ingre - trie ingreditne
+    // if(tagListIng){
+    //     for (const tag of tagListIng) {
+    //         const lowerCaseValue = tag.toLowerCase();
+    //         result = result.filter(recipe => {
+    //             //utilisation d'une variable lowerCase pour éviter de faire plusieurs fois value.toLowerCase()
+    //             return recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(lowerCaseValue));
+    //         });
+            
+    //     }
+    // }
+
+    
     //if has tag app - trie app
     //if has tag ust - trie ust
 
