@@ -5,24 +5,31 @@ export function getTags(recipes) {
         //if(name ingredient, etc... existe pas dans mon tableau -> ajouter dans le tableau)
         //push
         for (const ingredients of recipe.ingredients) {
-            if (!tags.ingredients.includes(ingredients.ingredient)) {
-                tags.ingredients.push(ingredients.ingredient);
+            const ingredientName = capitalizeFirstLetter(ingredients.ingredient.trim());
+            if (!tags.ingredients.includes(ingredientName)) {
+                tags.ingredients.push(ingredientName);
             }
         }
 
-        if (!tags.appliances.includes(recipe.appliance)) {
-            tags.appliances.push(recipe.appliance);
+        const applianceName = capitalizeFirstLetter(recipe.appliance.trim());
+        if (!tags.appliances.includes(applianceName)) {
+            tags.appliances.push(applianceName);
         }
 
-        for (const ustensils of recipe.ustensils) {
-            if (!tags.ustensils.includes(ustensils)) {
-                tags.ustensils.push(ustensils);
+        for (const ustensil of recipe.ustensils) {
+            const ustensilName = capitalizeFirstLetter(ustensil.trim());
+            if (!tags.ustensils.includes(ustensilName)) {
+                tags.ustensils.push(ustensilName);
             }
         }
         return tags;
     },
     //creation 3 array vide pour les incrementer
     { ingredients: [], appliances: [], ustensils: [] });
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
 function renderDropdown(nameTag) {
@@ -53,19 +60,47 @@ function renderDropdown(nameTag) {
 
     document.getElementById("dropdown").appendChild(dropdownContainer);
 
-    //Ouvrir et fermer la liste de tags / utilisation toggle pour ajouter class si présent ou absent en éliminant if / else
+    const dropdownBlocks = document.getElementsByClassName("dropdown-block");
+    const displayTags = "display-tags";
+    const displayNoTags = "display-noTags";
+    const dropdownBlockTags = "dropdown-block-tags";
+    const dropdownBlockNoTags = "dropdown-block-noTags";
+    const dropdownDivInputIconTags = "dropdown-divInputIcon-tags";
+    const dropdownDivInputIconNoTags = "dropdown-divInputIcon-noTags";
+
+    function closeAllOtherDropdowns(nameTag) {
+        Array.from(dropdownBlocks).forEach((dropdownBlock) => {
+            if (dropdownBlock.id !== nameTag) {
+                const tagsListContainer = dropdownBlock.querySelector(".tagsList-block");
+                const dropdownInputIcon = dropdownBlock.querySelector(".dropdown-divInputIcon");
+                dropdownBlock.classList.remove(dropdownBlockTags);
+                dropdownBlock.classList.add(dropdownBlockNoTags);
+                tagsListContainer.classList.remove(displayTags);
+                tagsListContainer.classList.add(displayNoTags);
+                dropdownInputIcon.classList.remove(dropdownDivInputIconTags);
+                dropdownInputIcon.classList.add(dropdownDivInputIconNoTags);
+            }
+        });
+    }
+
     dropdownButton.addEventListener('click', (e) => {
         e.preventDefault();
-        tagsListContainer.classList.toggle("display-noTags");
-        tagsListContainer.classList.toggle("display-tags");
-        dropdownInputIcon.classList.toggle("dropdown-divInputIcon-noTags");
-        dropdownInputIcon.classList.toggle("dropdown-divInputIcon-tags");
-        dropdownContainer.classList.toggle("dropdown-block-noTags");
-        dropdownContainer.classList.toggle("dropdown-block-tags");
+        const tagsListContainer = dropdownContainer.querySelector(".tagsList-block");
+        const dropdownInputIcon = dropdownContainer.querySelector(".dropdown-divInputIcon");
+        const isOpen = tagsListContainer.classList.contains("display-tags");
+
+        closeAllOtherDropdowns(nameTag);
+
+        dropdownContainer.classList.toggle(dropdownBlockTags, !isOpen);
+        dropdownContainer.classList.toggle(dropdownBlockNoTags, isOpen);
+        tagsListContainer.classList.toggle(displayTags, !isOpen);
+        tagsListContainer.classList.toggle(displayNoTags, isOpen);
+        dropdownInputIcon.classList.toggle(dropdownDivInputIconTags, !isOpen);
+        dropdownInputIcon.classList.toggle(dropdownDivInputIconNoTags, isOpen);
     });
 }
 
-function renderTagList(nameTag, tagList){
+export function renderTagList(nameTag, tagList){
     let tagsListContainer = document.querySelector(`.tagsList-block-${nameTag}`);
     tagsListContainer.innerHTML = "";
 
@@ -78,11 +113,12 @@ function renderTagList(nameTag, tagList){
         tags.addEventListener('click', (e) => {
             e.preventDefault();
             addTag(tags, nameTag);
+            // search(recipes, 'coco')
         })
     }
 }
 
-// AddTag (LEs tage en question nom du tag, Catégorie HTML, search()) -> //Close Tag, search()
+//permet d'ajouter / supprimer des tags
 function addTag (tags, nameTag) {
     const tagsText = document.createElement("span");
     tagsText.className = `tags-text`;
@@ -108,17 +144,18 @@ function addTag (tags, nameTag) {
     })
 }
 
-function searchTagList() {
-    //Input Elm
-
-    //AddEnventListener
-    //Récuper la value
-    //Filter la liste de tag par rapporut a la value input -> Refait newTabTagList -> renderTagList()
+//permet de filtrer la liste des tags en faisant une recherche dans leur input dropdown
+function searchTagList(nameTag, tagList) {
+    const dropdownInput = document.querySelector(`.dropdown-${nameTag}`);
+    dropdownInput.addEventListener('input', () => {
+        const searchTerm = dropdownInput.value.toLowerCase();
+        const filteredTagList = tagList.filter(tag => tag.toLowerCase().includes(searchTerm));
+        renderTagList(nameTag, filteredTagList);
+    });
 }
 
-
-export function init(nameTag, tagList){
-    renderDropdown(nameTag)
-    // searchTagList()
-    renderTagList(nameTag, tagList)
+export function init(nameTag, tagList) {
+    renderDropdown(nameTag);
+    renderTagList(nameTag, tagList);
+    searchTagList(nameTag, tagList);
 }

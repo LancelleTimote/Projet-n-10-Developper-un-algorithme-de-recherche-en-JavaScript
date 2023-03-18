@@ -78,19 +78,19 @@ header, .searchBar-container, .card, .dropdown-container {
     max-width: 85% !important;
 }
 
-.searchBar-container, .tags-block, .dropdown-block {
+.searchBar-container, .tags-block {
     border-radius: 5px;
 }
 
-.dropdown-block-ingredients, .tags-block-ingredients {
+.dropdown-block-ingredients, .tagsList-block-ingredients,  .tags-block-ingredients {
     background-color: #3282F7;
 }
 
-.dropdown-block-appliances, .tags-block-appliances {
+.dropdown-block-appliances, .tagsList-block-appliances, .tags-block-appliances {
     background-color: #68D9A4;
 }
 
-.dropdown-block-ustensils, .tags-block-ustensils {
+.dropdown-block-ustensils, .tagsList-block-ustensils, .tags-block-ustensils {
     background-color: #ED6454;
 }
 
@@ -201,15 +201,21 @@ header, .searchBar-container, .card, .dropdown-container {
 
 .dropdown-block-noTags {
     height: 65px;
+    border-radius: 5px;
 }
 
 /* ce que j'ajoute */
 .display-tags {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    max-height: 500px;
+    max-height: 350px;
     overflow: auto;
     gap: 5px;
+    position: absolute;
+    margin-top: 10px;
+    width: -webkit-fill-available;
+    border-radius: 0 0 5px 5px;
+    padding-bottom: 10px;
 }
 
 .dropdown-divInputIcon-tags {
@@ -222,7 +228,9 @@ header, .searchBar-container, .card, .dropdown-container {
 }
 
 .dropdown-block-tags {
-    width: auto !important;
+    width: 50% !important;
+    position: relative;
+    border-radius: 5px 5px 0 0;
 }
 
 .dropdown::-webkit-search-cancel-button, .searchBar::-webkit-search-cancel-button {
