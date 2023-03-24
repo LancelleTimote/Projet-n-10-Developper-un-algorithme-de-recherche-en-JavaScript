@@ -1,12 +1,12 @@
 export function getTags(recipes) {
-    //reduce permet de traiter chaque élément du tableau recipes en accumulant les résultats dans l'objet tags
     return recipes.reduce((tags, recipe) => {
-        //ingredients (boucle pour recupere ingredient)
-        //if(name ingredient, etc... existe pas dans mon tableau -> ajouter dans le tableau)
-        //push
+        //Parcourt le tableau des ingrédients de la recette
         for (const ingredients of recipe.ingredients) {
+            //Met en majuscule la première lettre de l'ingrédient et supprime les espaces au début et à la fin
             const ingredientName = capitalizeFirstLetter(ingredients.ingredient.trim());
+            //Vérifie si l'ingrédient est déjà présent dans le tableau "ingredients" de l'objet "tags"
             if (!tags.ingredients.includes(ingredientName)) {
+                //Ajoute l'ingrédient dans le tableau "ingredients" de l'objet "tags" s'il n'est pas déjà présent
                 tags.ingredients.push(ingredientName);
             }
         }
@@ -24,18 +24,44 @@ export function getTags(recipes) {
         }
         return tags;
     },
-    //creation 3 array vide pour les incrementer
+    //Initialise l'objet "tags" avec les tableaux vides
     { ingredients: [], appliances: [], ustensils: [] });
 }
 
+//Prend une chaîne de caractères en entrée et renvoie une nouvelle chaîne avec la première lettre en majuscule
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
+//Crée et affiche un menu déroulant sur la page pour les tags d'une catégorie spécifique
 function renderDropdown(nameTag) {
+    //Conteneur pour la liste des tags
+    const tagsListContainer = createTagsListContainer(nameTag);
+    //Icône de l'input pour le menu déroulant
+    const dropdownInputIcon = createDropdownInputIcon(nameTag);
+    //Conteneur du menu déroulant complet avec l'icône et la liste des tags
+    const dropdownContainer = createDropdownContainer(nameTag, dropdownInputIcon, tagsListContainer);
+    //Ajoute le conteneur du menu déroulant à la page
+    addDropdownContainerToPage(dropdownContainer);
+
+    //Récupère le bouton du menu déroulant pour y ajouter un événement de clic
+    const dropdownButton = dropdownInputIcon.querySelector("button");
+    //Ajoute l'événement de clic qui ouvre et ferme le menu déroulant et ferme les autres menus déroulants ouverts pour cette catégorie de tags
+    dropdownButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleDropdown(dropdownContainer, tagsListContainer, dropdownInputIcon);
+        closeAllOtherDropdowns(nameTag);
+    });
+}
+
+//Création conteneur pour la liste des tags d'une catégorie spécifique
+function createTagsListContainer(nameTag) {
     const tagsListContainer = document.createElement("ul");
     tagsListContainer.className = `display-noTags tagsList-block tagsList-block-${nameTag}`;
+    return tagsListContainer;
+}
 
+function createDropdownInputIcon(nameTag) {
     const dropdownIcon = document.createElement("i");
     dropdownIcon.className = "fa-solid fa-chevron-down fa-lg";
 
@@ -52,51 +78,44 @@ function renderDropdown(nameTag) {
     const dropdownInputIcon = document.createElement("div");
     dropdownInputIcon.className = "dropdown-divInputIcon dropdown-divInputIcon-noTags";
     dropdownInputIcon.append(dropdownInput, dropdownButton);
+    return dropdownInputIcon;
+}
 
+function createDropdownContainer(nameTag, dropdownInputIcon, tagsListContainer) {
     const dropdownContainer = document.createElement("div");
     dropdownContainer.className = `col-2 dropdown-block dropdown-block-noTags dropdown-block-${nameTag} noPadding`;
     dropdownContainer.id = nameTag;
     dropdownContainer.append(dropdownInputIcon, tagsListContainer);
+    return dropdownContainer;
+}
 
+function addDropdownContainerToPage(dropdownContainer) {
     document.getElementById("dropdown").appendChild(dropdownContainer);
+}
 
+function toggleDropdown(dropdownContainer, tagsListContainer, dropdownInputIcon) {
+    const isOpen = tagsListContainer.classList.contains("display-tags");
+    dropdownContainer.classList.toggle("dropdown-block-tags", !isOpen);
+    dropdownContainer.classList.toggle("dropdown-block-noTags", isOpen);
+    tagsListContainer.classList.toggle("display-tags", !isOpen);
+    tagsListContainer.classList.toggle("display-noTags", isOpen);
+    dropdownInputIcon.classList.toggle("dropdown-divInputIcon-tags", !isOpen);
+    dropdownInputIcon.classList.toggle("dropdown-divInputIcon-noTags", isOpen);
+}
+
+function closeAllOtherDropdowns(nameTag) {
     const dropdownBlocks = document.getElementsByClassName("dropdown-block");
-    const displayTags = "display-tags";
-    const displayNoTags = "display-noTags";
-    const dropdownBlockTags = "dropdown-block-tags";
-    const dropdownBlockNoTags = "dropdown-block-noTags";
-    const dropdownDivInputIconTags = "dropdown-divInputIcon-tags";
-    const dropdownDivInputIconNoTags = "dropdown-divInputIcon-noTags";
-
-    function closeAllOtherDropdowns(nameTag) {
-        Array.from(dropdownBlocks).forEach((dropdownBlock) => {
-            if (dropdownBlock.id !== nameTag) {
-                const tagsListContainer = dropdownBlock.querySelector(".tagsList-block");
-                const dropdownInputIcon = dropdownBlock.querySelector(".dropdown-divInputIcon");
-                dropdownBlock.classList.remove(dropdownBlockTags);
-                dropdownBlock.classList.add(dropdownBlockNoTags);
-                tagsListContainer.classList.remove(displayTags);
-                tagsListContainer.classList.add(displayNoTags);
-                dropdownInputIcon.classList.remove(dropdownDivInputIconTags);
-                dropdownInputIcon.classList.add(dropdownDivInputIconNoTags);
-            }
-        });
-    }
-
-    dropdownButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        const tagsListContainer = dropdownContainer.querySelector(".tagsList-block");
-        const dropdownInputIcon = dropdownContainer.querySelector(".dropdown-divInputIcon");
-        const isOpen = tagsListContainer.classList.contains("display-tags");
-
-        closeAllOtherDropdowns(nameTag);
-
-        dropdownContainer.classList.toggle(dropdownBlockTags, !isOpen);
-        dropdownContainer.classList.toggle(dropdownBlockNoTags, isOpen);
-        tagsListContainer.classList.toggle(displayTags, !isOpen);
-        tagsListContainer.classList.toggle(displayNoTags, isOpen);
-        dropdownInputIcon.classList.toggle(dropdownDivInputIconTags, !isOpen);
-        dropdownInputIcon.classList.toggle(dropdownDivInputIconNoTags, isOpen);
+    Array.from(dropdownBlocks).forEach((dropdownBlock) => {
+        if (dropdownBlock.id !== nameTag) {
+            const tagsListContainer = dropdownBlock.querySelector(".tagsList-block");
+            const dropdownInputIcon = dropdownBlock.querySelector(".dropdown-divInputIcon");
+            dropdownBlock.classList.remove("dropdown-block-tags");
+            dropdownBlock.classList.add("dropdown-block-noTags");
+            tagsListContainer.classList.remove("display-tags");
+            tagsListContainer.classList.add("display-noTags");
+            dropdownInputIcon.classList.remove("dropdown-divInputIcon-tags");
+            dropdownInputIcon.classList.add("dropdown-divInputIcon-noTags");
+        }
     });
 }
 
@@ -112,8 +131,10 @@ export function renderTagList(nameTag, tagList){
         //Quand on clic sur le tag lance addTag
         tags.addEventListener('click', (e) => {
             e.preventDefault();
-            addTag(tags, nameTag);
-            // search(recipes, 'coco')
+            if (!tags.classList.contains('selected')) {
+                addTag(tags, nameTag);
+                tags.classList.add('selected');
+            }
         })
     }
 }
@@ -141,6 +162,7 @@ function addTag (tags, nameTag) {
     tagsButton.addEventListener('click', (e) => {
         e.preventDefault();
         tagsBlock.remove();
+        tags.classList.remove('selected');
     })
 }
 

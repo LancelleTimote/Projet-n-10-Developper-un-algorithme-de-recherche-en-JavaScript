@@ -244,3 +244,8 @@ header, .searchBar-container, .card, .dropdown-container {
 .gapMainElt {
     margin-top: 25px !important;
 }
+
+.selected {
+    pointer-events: none;
+    opacity: 0.5;
+}
