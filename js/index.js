@@ -14,5 +14,3 @@ function startApp() {
 }
 
 startApp();
-
-// search(recipes, 'coco')

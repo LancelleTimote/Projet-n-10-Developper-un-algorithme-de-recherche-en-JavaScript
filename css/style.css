@@ -59,7 +59,19 @@ h1 {
 }
 
 .tags-text {
-    margin-left: 20px;
+    line-height: 1;
+    font-size: 14px;
+    margin-left: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tags-text::-webkit-scrollbar {
+    display: block;
+    width: 1px;
+    overflow: overlay;
+    height: 20px;
 }
 
 .circle-x, .tags-text, .chevron-down, .dropdown-block input::placeholder {
@@ -67,14 +79,15 @@ h1 {
 }
 
 .circle-x {
-    margin-right: 20px;
+    margin-left: 5px;
+    margin-right: 15px;
 }
 
 header, .searchBar-container, .card, .dropdown-container {
     margin-top: 25px !important;
 }
 
-.searchBar-container, .cards-container, .tags-container, .dropdown-container {
+.searchBar-container, .cards-container, .tags-container, .dropdown-container, .errorMessage-container {
     max-width: 85% !important;
 }
 
@@ -242,10 +255,16 @@ header, .searchBar-container, .card, .dropdown-container {
 }
 
 .gapMainElt {
-    margin-top: 25px !important;
+    margin-top: 20px !important;
 }
 
 .selected {
     pointer-events: none;
     opacity: 0.5;
+}
+
+.error-message {
+    color: red;
+    padding-left: 0 !important;
+    padding-top: 5px;
 }
