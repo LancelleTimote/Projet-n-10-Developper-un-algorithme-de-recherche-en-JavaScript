@@ -7,15 +7,20 @@ export function searchBar(recipes) {
 
     searchBarInput.addEventListener('input', () => {
         const inputElt = searchBarInput.value;
-        if(inputElt.length === 0 || inputElt.length >= 3) {
+        if(inputElt.length >= 3) {
             messageError.textContent = '';
             search(recipes, inputElt);
         } else {
-            messageError.textContent = 'Veuillez saisir au moins 3 caractères';
+            if(inputElt.length === 0){
+                messageError.textContent = '';
+            }else{
+                messageError.textContent = 'Veuillez saisir au moins 3 caractères';
+            }
             renderTagList('ingredients', getTags(recipes).ingredients);
             renderTagList('appliances', getTags(recipes).appliances);
             renderTagList('ustensils', getTags(recipes).ustensils);
-            renderRecipes(recipes);
+            // renderRecipes(recipes);
+            search(recipes);
         }
     });
 }
@@ -30,6 +35,16 @@ export function search(recipes, value = null){
             || recipe.description.toLowerCase().includes(lowerCaseValue)
             || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(lowerCaseValue))
         });
+
+        // newTab = []
+        //Ajouter les recete OK valeur ipute dans un tableuea || Supprimer es resset non conrerespondante)
+        // pas le droit fonction native
+        // for (const recipe of recipes) {
+            //Si recipe = valuerInpute
+            // (Soit suppprimer ou ajoure dans un autre tablea)
+        // }
+
+        // result = newTab;
     }
 
     //Gestion des tags sélectionnés
@@ -37,26 +52,30 @@ export function search(recipes, value = null){
     const tagListApp = document.querySelectorAll(".tags-block-appliances span");
     const tagListUst = document.querySelectorAll(".tags-block-ustensils span");
 
-    const selectedTags = [];
-
-    //Ajouter les tags sélectionnés dans le tableau selectedTags
+    //Filtrer les recettes en fonction des tags ingrédients sélectionnés
     for(const tag of tagListIng) {
-        selectedTags.push(tag.textContent.toLowerCase());
-    }
-    for(const tag of tagListApp) {
-        selectedTags.push(tag.textContent.toLowerCase());
-    }
-    for(const tag of tagListUst) {
-        selectedTags.push(tag.textContent.toLowerCase());
+        const tagName = tag.textContent.toLowerCase();
+        result = result.filter(recipe => {
+            const recipeTags = (recipe.ingredients || []).map(item => (item.ingredient || '').toLowerCase());
+            return recipeTags.includes(tagName);
+        });
     }
 
-    //Filtrer les recettes en fonction des tags sélectionnés
-    if(selectedTags.length > 0) {
+    //Filtrer les recettes en fonction des tags appareils sélectionnés
+    for(const tag of tagListApp) {
+        const tagName = tag.textContent.toLowerCase();
         result = result.filter(recipe => {
-            const recipeTags = [...(recipe.ingredients || []).map(item => (item.ingredient || '').toLowerCase()),
-                                ...(recipe.appliances || []).map(item => (item.appliance || '').toLowerCase()),
-                                ...(recipe.ustensils || []).map(item => (item.ustensil || '').toLowerCase())];
-            return selectedTags.every(tag => recipeTags.includes(tag));
+            const recipeTags = (recipe.appliances || []).map(item => (item.appliance || '').toLowerCase());
+            return recipeTags.includes(tagName);
+        });
+    }
+
+    //Filtrer les recettes en fonction des tags ustensiles sélectionnés
+    for(const tag of tagListUst) {
+        const tagName = tag.textContent.toLowerCase();
+        result = result.filter(recipe => {
+            const recipeTags = (recipe.ustensils || []).map(item => (item.ustensil || '').toLowerCase());
+            return recipeTags.includes(tagName);
         });
     }
 
@@ -65,7 +84,7 @@ export function search(recipes, value = null){
         messageError.textContent = 'Aucune recette ne correspond à vos critères. Vous pouvez chercher par exemple "Salade de riz", "Pomme", "Saladier", etc...';
     }
 
-    //Filter les targs
+    //Filter les tags
     const tagsUpdate = getTags(result);
     renderRecipes(result);
     renderTagList('ingredients', tagsUpdate.ingredients)
@@ -73,9 +92,23 @@ export function search(recipes, value = null){
     renderTagList('ustensils', tagsUpdate.ustensils)
 }
 
+
+//À lancer dans addtag et closetag
 //Function tagSearch
-//Récuperes les valuer du l'inpute si < a 3
-//Search(Recipe + valeurInput)
+//Récuperes les valuer du l'inpute si < a 3  const valeurInput = document.getElementById('searchBarInput').value;
+// if(valeurInput > 3)
+//Search(Recipe , valeurInput)
+// /else
+//Search(Recipe)
+
+// export function tagSearch(recipes) {
+//     const inputValue = document.getElementById('searchBarInput').value;
+//     if(inputValue > 3) {
+//         search(recipes, inputValue);
+//     }else{
+//         search(recipes);
+//     }
+// }
 
     // //Si un ou plusieurs tags sont sélectionnés
     // if(tagListIng.length > 0 || tagListApp.length > 0 || tagListUst.length > 0){

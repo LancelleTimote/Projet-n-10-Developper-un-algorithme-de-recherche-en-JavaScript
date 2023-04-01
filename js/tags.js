@@ -1,3 +1,5 @@
+// import {tagSearch} from "./search.js";
+
 export function getTags(recipes) {
     return recipes.reduce((tags, recipe) => {
         //Parcourt le tableau des ingrédients de la recette
@@ -134,6 +136,7 @@ export function renderTagList(nameTag, tagList){
             if (!tags.classList.contains('selected')) {
                 addTag(tags, nameTag);
                 tags.classList.add('selected');
+                // tagSearch();
             }
         })
     }
@@ -163,6 +166,7 @@ function addTag (tags, nameTag) {
         e.preventDefault();
         tagsBlock.remove();
         tags.classList.remove('selected');
+        // tagSearch();
     })
 }
 
