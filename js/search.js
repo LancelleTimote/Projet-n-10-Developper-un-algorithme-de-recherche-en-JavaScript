@@ -1,4 +1,4 @@
-import renderRecipes from "./cards.js";
+import {renderRecipes} from "./cards.js";
 import {getTags , renderTagList} from "./tags.js";
 
 export function searchBar(recipes) {
@@ -19,7 +19,6 @@ export function searchBar(recipes) {
             renderTagList('ingredients', getTags(recipes).ingredients);
             renderTagList('appliances', getTags(recipes).appliances);
             renderTagList('ustensils', getTags(recipes).ustensils);
-            // renderRecipes(recipes);
             search(recipes);
         }
     });
@@ -28,6 +27,7 @@ export function searchBar(recipes) {
 export function search(recipes, value = null){
     const messageError = document.querySelector('.error-message');
     let result = recipes;
+
     if(value) {
         result = recipes.filter(recipe => {
             const lowerCaseValue = value.toLowerCase();
@@ -65,7 +65,7 @@ export function search(recipes, value = null){
     for(const tag of tagListApp) {
         const tagName = tag.textContent.toLowerCase();
         result = result.filter(recipe => {
-            const recipeTags = (recipe.appliances || []).map(item => (item.appliance || '').toLowerCase());
+            const recipeTags = (recipe.appliance.toLowerCase());
             return recipeTags.includes(tagName);
         });
     }
@@ -74,14 +74,9 @@ export function search(recipes, value = null){
     for(const tag of tagListUst) {
         const tagName = tag.textContent.toLowerCase();
         result = result.filter(recipe => {
-            const recipeTags = (recipe.ustensils || []).map(item => (item.ustensil || '').toLowerCase());
+            const recipeTags = (recipe.ustensils || []).map(item => item.trim().toLowerCase());
             return recipeTags.includes(tagName);
         });
-    }
-
-    // Affichage message d'erreur si la saisie ne correspond à aucune recette
-    if(result.length === 0) {
-        messageError.textContent = 'Aucune recette ne correspond à vos critères. Vous pouvez chercher par exemple "Salade de riz", "Pomme", "Saladier", etc...';
     }
 
     //Filter les tags
@@ -90,41 +85,20 @@ export function search(recipes, value = null){
     renderTagList('ingredients', tagsUpdate.ingredients)
     renderTagList('appliances', tagsUpdate.appliances)
     renderTagList('ustensils', tagsUpdate.ustensils)
+
+    // Affichage message d'erreur si la saisie ne correspond à aucune recette
+    if(result.length === 0) {
+        messageError.textContent = 'Aucune recette ne correspond à vos critères. Vous pouvez chercher par exemple "Salade de riz", "Pomme", "Saladier", etc...';
+    }else{
+        messageError.textContent = '';
+    }
 }
 
-
-//À lancer dans addtag et closetag
-//Function tagSearch
-//Récuperes les valuer du l'inpute si < a 3  const valeurInput = document.getElementById('searchBarInput').value;
-// if(valeurInput > 3)
-//Search(Recipe , valeurInput)
-// /else
-//Search(Recipe)
-
-// export function tagSearch(recipes) {
-//     const inputValue = document.getElementById('searchBarInput').value;
-//     if(inputValue > 3) {
-//         search(recipes, inputValue);
-//     }else{
-//         search(recipes);
-//     }
-// }
-
-    // //Si un ou plusieurs tags sont sélectionnés
-    // if(tagListIng.length > 0 || tagListApp.length > 0 || tagListUst.length > 0){
-    //     //Filtre les recettes selon les tags sélectionnés pour chaque catégorie (ingrédients, appareils, ustensiles)
-    //     if(tagListIng.length > 0){
-    //         const tagValuesIng = Array.from(tagListIng).map(tag => tag.textContent.toLowerCase());
-    //         result = result.filter(recipe => recipe.ingredients.some(ingredient => tagValuesIng.includes(ingredient.ingredient.toLowerCase())));
-    //     }
-
-    //     if(tagListApp.length > 0){
-    //         const tagValuesApp = Array.from(tagListApp).map(tag => tag.textContent.toLowerCase());
-    //         result = result.filter(recipe => tagValuesApp.includes(recipe.appliance.toLowerCase()));
-    //     }
-
-    //     if(tagListUst.length > 0){
-    //         const tagValuesUst = Array.from(tagListUst).map(tag => tag.textContent.toLowerCase());
-    //         result = result.filter(recipe => recipe.ustensils.some(ustensil => tagValuesUst.includes(ustensil.toLowerCase())));
-    //     }
-    // }
+export function tagSearch(recipes) {
+    const inputValue = document.getElementById('searchBarInput').value;
+    if(inputValue.length >= 3) {
+        search(recipes, inputValue);
+    }else{
+        search(recipes);
+    }
+}

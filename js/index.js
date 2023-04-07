@@ -1,5 +1,5 @@
 import recipes from "../data/recipes.js";
-import renderRecipes from "./cards.js";
+import {renderRecipes} from "./cards.js";
 import {getTags , init} from "./tags.js";
 import {searchBar, search} from "./search.js";
 

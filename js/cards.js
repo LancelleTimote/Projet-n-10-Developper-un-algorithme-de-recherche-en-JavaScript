@@ -75,7 +75,7 @@ function createRecipeCard(recipe) {
     return card;
 }
 
-function renderRecipes(arrayRecipes){
+export function renderRecipes(arrayRecipes){
     //On récupère l'élément HTML où on va insérer les cartes de recettes
     const cardsElt = document.getElementById("cards");
     // On vide l'élément HTML pour éviter d'avoir des doublons de cartes
@@ -88,5 +88,3 @@ function renderRecipes(arrayRecipes){
         cardsElt.appendChild(card);
     }
 }
-
-export default renderRecipes;
