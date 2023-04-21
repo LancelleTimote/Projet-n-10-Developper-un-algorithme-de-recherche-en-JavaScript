@@ -35,16 +35,6 @@ export function search(recipes, value = null){
             || recipe.description.toLowerCase().includes(lowerCaseValue)
             || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(lowerCaseValue))
         });
-
-        // newTab = []
-        //Ajouter les recete OK valeur ipute dans un tableuea || Supprimer es resset non conrerespondante)
-        // pas le droit fonction native
-        // for (const recipe of recipes) {
-            //Si recipe = valuerInpute
-            // (Soit suppprimer ou ajoure dans un autre tablea)
-        // }
-
-        // result = newTab;
     }
 
     //Gestion des tags sélectionnés
