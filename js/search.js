@@ -1,6 +1,7 @@
 import {renderRecipes} from "./cards.js";
 import {getTags , renderTagList} from "./tags.js";
 
+//Prend en paramètre une liste de recettes
 export function searchBar(recipes) {
     const searchBarInput = document.getElementById('searchBarInput');
     const messageError = document.querySelector('.error-message');
@@ -16,9 +17,11 @@ export function searchBar(recipes) {
             }else{
                 messageError.textContent = 'Veuillez saisir au moins 3 caractères';
             }
+            //Réinitialise la liste de tags affichés
             renderTagList('ingredients', getTags(recipes).ingredients);
             renderTagList('appliances', getTags(recipes).appliances);
             renderTagList('ustensils', getTags(recipes).ustensils);
+            //On lance une recherche sans paramètres pour afficher toutes les recettes
             search(recipes);
         }
     });
@@ -28,13 +31,25 @@ export function search(recipes, value = null){
     const messageError = document.querySelector('.error-message');
     let result = recipes;
 
-    if(value) {
-        result = recipes.filter(recipe => {
-            const lowerCaseValue = value.toLowerCase();
-            return recipe.name.toLowerCase().includes(lowerCaseValue)
-            || recipe.description.toLowerCase().includes(lowerCaseValue)
-            || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(lowerCaseValue))
-        });
+    if (value) {
+        const lowerCaseValue = value.toLowerCase();
+        const newTab = [];
+        for (const recipe of recipes) {
+            const recipeName = recipe.name.toLowerCase();
+            const recipeDescription = recipe.description.toLowerCase();
+            let ingredientFound = false;
+            for (const ingredient of recipe.ingredients) {
+                const ingredientName = ingredient.ingredient.toLowerCase();
+                if (ingredientName.includes(lowerCaseValue)) {
+                    ingredientFound = true;
+                    break;
+                }
+            }
+            if (recipeName.includes(lowerCaseValue) || recipeDescription.includes(lowerCaseValue) || ingredientFound) {
+                newTab.push(recipe);
+            }
+        }
+        result = newTab;
     }
 
     //Gestion des tags sélectionnés
