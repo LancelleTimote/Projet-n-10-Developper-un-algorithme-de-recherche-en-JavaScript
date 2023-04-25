@@ -122,6 +122,8 @@ function closeAllOtherDropdowns(nameTag) {
     });
 }
 
+let addedTags = []; //Tableau pour stocker les tags déjà ajoutés
+
 export function renderTagList(nameTag, tagList){
     let tagsListContainer = document.querySelector(`.tagsList-block-${nameTag}`);
     tagsListContainer.innerHTML = "";
@@ -134,16 +136,21 @@ export function renderTagList(nameTag, tagList){
         //Quand on clic sur le tag lance addTag
         tags.addEventListener('click', (e) => {
             e.preventDefault();
-            if (!tags.classList.contains('selected')) {
+            if (!addedTags.includes(tag)) { //Vérifier si le tag n'a pas déjà été ajouté
                 addTag(tags, nameTag);
-                tags.classList.add('selected');
+                addedTags.push(tag); //Ajouter le tag au tableau
                 tagSearch(recipes);
+                tags.classList.add("added"); //Ajouter la classe "added" pour griser le tag
             }
         })
+
+        if (addedTags.includes(tag)) { //Si le tag a déjà été ajouté, ajouter la classe "added" pour griser le tag
+            tags.classList.add("added");
+        }
     }
 }
 
-//permet d'ajouter / supprimer des tags
+//Permet d'ajouter / supprimer des tags
 function addTag (tags, nameTag) {
     const tagsText = document.createElement("span");
     tagsText.className = `tags-text`;
@@ -166,12 +173,13 @@ function addTag (tags, nameTag) {
     tagsButton.addEventListener('click', (e) => {
         e.preventDefault();
         tagsBlock.remove();
-        tags.classList.remove('selected');
+        addedTags = addedTags.filter(item => item !== tags.textContent); //Enlever le tag du tableau
         tagSearch(recipes);
+        tags.classList.remove("added"); //Enlever la classe "added" pour enlever la grisaille du tag
     })
 }
 
-//permet de filtrer la liste des tags en faisant une recherche dans leur input dropdown
+//Permet de filtrer la liste des tags en faisant une recherche dans leur input dropdown
 function searchTagList(nameTag, tagList) {
     const dropdownInput = document.querySelector(`.dropdown-${nameTag}`);
     dropdownInput.addEventListener('input', () => {

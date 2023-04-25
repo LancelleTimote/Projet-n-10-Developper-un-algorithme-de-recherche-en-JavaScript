@@ -1,6 +1,7 @@
 import {renderRecipes} from "./cards.js";
 import {getTags , renderTagList} from "./tags.js";
 
+//Prend en paramètre une liste de recettes
 export function searchBar(recipes) {
     const searchBarInput = document.getElementById('searchBarInput');
     const messageError = document.querySelector('.error-message');
@@ -16,9 +17,11 @@ export function searchBar(recipes) {
             }else{
                 messageError.textContent = 'Veuillez saisir au moins 3 caractères';
             }
+            //Réinitialise la liste de tags affichés
             renderTagList('ingredients', getTags(recipes).ingredients);
             renderTagList('appliances', getTags(recipes).appliances);
             renderTagList('ustensils', getTags(recipes).ustensils);
+            //On lance une recherche sans paramètres pour afficher toutes les recettes
             search(recipes);
         }
     });
